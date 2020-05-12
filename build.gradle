@@ -97,7 +97,7 @@ processResources {
     with copySpec{
         from 'src/main/resources'
         filter(ReplaceTokens, tokens: [description: project.property('description'),
-                                       projectName: project.name,
+                                       projectName: project.property('projectName'),
                                        pluginName: project.property('pluginName'),
                                        version: project.version + ' (' + hash.trim() + ')'])
     }
