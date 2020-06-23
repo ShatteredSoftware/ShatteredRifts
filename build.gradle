@@ -91,7 +91,6 @@ publishing {
             artifactId = project.property("projectName")
             artifact javadocJar
             artifact sourcesJar
-            artifact standaloneJar
             artifact distJar
             artifact jar
             pom {
