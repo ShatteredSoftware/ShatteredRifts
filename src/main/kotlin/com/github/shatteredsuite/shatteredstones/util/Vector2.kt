@@ -55,14 +55,13 @@ data class Vector2(val x: Double, val y: Double) {
         return false
     }
 
-    fun radiusPoint(point: Double, radius: Int) : Vector2 {
+    fun radiusPoint(point: Double, radius: Double) : Vector2 {
         val y = sin(point)
         val x = cos(point)
-        val vec = Vector2(x, y) * radius
-        return this + vec
+        return Vector2(this.x + (radius * x), this.y + (y * radius))
     }
 
-    fun randomRadiusPoint(radius: Int) : Vector2 {
+    fun randomRadiusPoint(radius: Double) : Vector2 {
         return radiusPoint(randomRadian(), radius)
     }
 

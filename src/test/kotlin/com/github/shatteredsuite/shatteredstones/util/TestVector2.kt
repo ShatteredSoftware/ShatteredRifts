@@ -48,12 +48,12 @@ class TestVector2 {
 
     @Test
     fun `test radius point`() {
-        Assert.assertEquals(vec0.offsetX(2.0), vec0.radiusPoint(0.0, 2))
+        Assert.assertEquals(vec0.offsetX(2.0), vec0.radiusPoint(0.0, 2.0))
     }
 
     @Test
     fun `test random radius point`() {
-        val radPoint = vec0.randomRadiusPoint(2)
+        val radPoint = vec0.randomRadiusPoint(2.0)
         Assert.assertEquals(vec0.distance(radPoint), 2.0, 0.001)
     }
 }
