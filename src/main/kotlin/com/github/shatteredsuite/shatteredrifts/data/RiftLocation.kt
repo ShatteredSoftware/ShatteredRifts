@@ -35,7 +35,7 @@ data class RiftLocation(override val id: String, val location: Location, val des
         }.collect(Collectors.toList())
     }
 
-    val placeholders: Map<String, String> = mapOf("id" to id, "radius" to radius.toString(),
+    val placeholders: Map<String, String> get() = mapOf("id" to id, "radius" to radius.toString(),
             "height" to height.toString(), "timing" to timing.toString(),
             "duration" to duration.toString(), "particles" to particles.toString(),
             "particle-frequency" to particleFrequency.toString(),
