@@ -3,7 +3,7 @@ loaded: "&eLoaded!"
 saved: "&eSaved!"
 command:
   version: |
-    &2ShatteredRifts &7v%version%%updatestatus%
+    &2ShatteredRifts &7v%version%%update-status%
     &7Author:&a UberPilot
     &7Support:&9 https://discord.gg/zUbNX9t
     &7Donate:&e https://patreon.com/UberPilot
@@ -36,3 +36,5 @@ command:
 rift-created: "&fRift &a%id%&f created."
 rift-deleted: "&fRift &a%id%&f deleted."
 rift-edited: "&a%key%&f on &a%id%&f set to &a%value%&f."
+up-to-date: " &f(Current)"
+update-available: " &a(Update %version% Available!)"
