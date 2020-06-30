@@ -1,4 +1,5 @@
 package com.github.shatteredsuite.shatteredstones.data
 
-class StoneLocationManager {
-}
+import com.github.shatteredsuite.core.util.Manager
+
+class StoneLocationManager : Manager<StoneLocation>()
