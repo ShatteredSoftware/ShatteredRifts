@@ -17,7 +17,7 @@ class LocationSerializer(private val instance: ShatteredRifts) : JsonSerializer<
         element.add("z", instance.gson.toJsonTree(location.z))
         element.add("pitch", instance.gson.toJsonTree(location.pitch))
         element.add("yaw", instance.gson.toJsonTree(location.yaw))
-        element.add("world", instance.gson.toJsonTree(location.world!!.name))
+        element.add("world", instance.gson.toJsonTree(location.world?.name))
         return element
     }
 }
@@ -30,8 +30,10 @@ class LocationDeserializer : JsonDeserializer<Location> {
         val z = obj.get("z").asDouble
         val pitch = obj.get("pitch").asFloat
         val yaw = obj.get("yaw").asFloat
-        val worldName = obj.get("world").asString
-        val world = Bukkit.getWorld(worldName)
+        val worldName = obj.get("world")
+        val world = if(worldName == null) {
+            Bukkit.getWorlds()[0]
+        } else Bukkit.getWorld(worldName.asString)
         return Location(world, x, y, z, yaw, pitch)
     }
 }
