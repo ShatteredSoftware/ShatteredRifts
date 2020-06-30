@@ -18,7 +18,13 @@ class EditLocationCommand(val instance: ShatteredRifts, parent: EditCommand) :
 
     override fun execute(ctx: CommandContext) {
         val oldRift = RiftLocationValidator.validate(ctx.args[0])
-        val loc = ArgParser.validLocation(ctx.args, 1)
+        val loc = if(ctx.sender is Player && ctx.args.size == 1) {
+            (ctx.sender as Player).location
+        }
+        else if(ctx.sender is Player && ctx.args.size == 4) {
+            ArgParser.validShortLocation(ctx.args, 1, ctx.sender as Player)
+        }
+        else ArgParser.validLocation(ctx.args, 1)
         val rift = oldRift.copy(location = loc)
         instance.riftManager.delete(oldRift.id)
         instance.riftManager.register(rift)
