@@ -1,14 +1,14 @@
 package com.github.shatteredsuite.shatteredrifts
 
 import com.github.shatteredsuite.core.ShatteredPlugin
-import com.github.shatteredsuite.shatteredrifts.data.StoneLocation
-import com.github.shatteredsuite.shatteredrifts.data.StoneLocationManager
+import com.github.shatteredsuite.shatteredrifts.data.RiftLocation
+import com.github.shatteredsuite.shatteredrifts.data.RiftManager
 import org.bukkit.Bukkit
 import org.bukkit.Location
 import org.bukkit.Particle
 
 class ShatteredRifts : ShatteredPlugin() {
-    var stoneLocationManager = StoneLocationManager()
+    var stoneLocationManager = RiftManager()
     var stoneTimings = mutableMapOf<String, Long>()
 
     init {
@@ -16,7 +16,7 @@ class ShatteredRifts : ShatteredPlugin() {
     }
 
     override fun onFirstTick() {
-        stoneLocationManager.register(StoneLocation("test",
+        stoneLocationManager.register(RiftLocation("test",
                 Location(Bukkit.getWorld("world"), 0.0, 100.0, 0.0),
                 Location(Bukkit.getWorld("world"), 50.0, 100.0, 0.0), 4.0, 4, 60,
                 500, 5, 10, Particle.PORTAL, Particle.ENCHANTMENT_TABLE))
