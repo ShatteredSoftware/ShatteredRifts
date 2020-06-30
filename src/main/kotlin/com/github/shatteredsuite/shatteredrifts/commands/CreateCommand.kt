@@ -7,7 +7,8 @@ import com.github.shatteredsuite.core.commands.responses.CancelResponse
 import com.github.shatteredsuite.shatteredrifts.ShatteredRifts
 import com.github.shatteredsuite.shatteredrifts.data.RiftLocation
 
-class CreateCommand(private val instance: ShatteredRifts, baseCommand: BaseCommand) : LeafCommand(instance, baseCommand, "create", "shatteredrifts.command.create", "command.create") {
+class CreateCommand(private val instance: ShatteredRifts, baseCommand: BaseCommand) :
+        LeafCommand(instance, baseCommand, "create", "shatteredrifts.command.create", "command.create") {
     init {
         addAlias("c")
         contextPredicates["args"] = ArgumentMinimumPredicate(CancelResponse(this.helpPath), 1)
