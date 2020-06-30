@@ -1,4 +1,5 @@
 <p align="center"><img src="https://raw.githubusercontent.com/ShatteredSuite/ShatteredRifts/master/header.png" alt=""/></p>
+
 -----
 <p align="center">
 <a href="https://github.com/ShatteredSuite/ShatteredRifts/blob/master/LICENSE"><img alt="License" src="https://img.shields.io/github/license/ShatteredSuite/ShatteredRifts?style=for-the-badge&logo=github" /></a>
