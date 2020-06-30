@@ -8,7 +8,7 @@ import org.bukkit.Location
 import org.bukkit.Particle
 
 class ShatteredRifts : ShatteredPlugin() {
-    var stoneLocationManager = RiftManager()
+    var riftManager = RiftManager()
     var stoneTimings = mutableMapOf<String, Long>()
 
     init {
@@ -16,17 +16,17 @@ class ShatteredRifts : ShatteredPlugin() {
     }
 
     override fun onFirstTick() {
-        stoneLocationManager.register(RiftLocation("test",
+        riftManager.register(RiftLocation("test",
                 Location(Bukkit.getWorld("world"), 0.0, 100.0, 0.0),
                 Location(Bukkit.getWorld("world"), 50.0, 100.0, 0.0), 4.0, 4, 60,
-                500, 5, 10, Particle.PORTAL, Particle.ENCHANTMENT_TABLE))
+                500, 5, 10, Particle.PORTAL, Particle.ENCHANTMENT_TABLE, true))
         Bukkit.getScheduler().scheduleSyncRepeatingTask(this, {
             this.updateStones()
         }, 20L, 20L)
     }
 
     fun updateStones() {
-        for(stoneLocation in stoneLocationManager.getAll()) {
+        for(stoneLocation in riftManager.getAll()) {
             // Add stones to timings if they're not in there already. Add one if they are.
             stoneTimings[stoneLocation.id] = stoneTimings[stoneLocation.id]?.plus(1) ?: 0
             // Play particles every 5 seconds.
