@@ -100,6 +100,6 @@ data class RiftLocation(override val id: String, val location: Location, val des
     }
 
     companion object {
-        val DEFAULT = RiftLocation("changeme", Location(null, 0.0, 0.0, 0.0), Location(null, 0.0, 0.0, 0.0), 4.0, 2, 30, 5, 500, 10, Particle.PORTAL, Particle.PORTAL, false)
+        val DEFAULT = RiftLocation("default", Location(null, 0.0, 0.0, 0.0), Location(null, 0.0, 0.0, 0.0), 4.0, 2, 30, 5, 500, 10, Particle.PORTAL, Particle.PORTAL, false)
     }
 }
