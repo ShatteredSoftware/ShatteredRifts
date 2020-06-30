@@ -12,7 +12,7 @@ import com.github.shatteredsuite.shatteredrifts.validators.RiftLocationValidator
 import org.bukkit.entity.Player
 
 class EditDestinationCommand(val instance: ShatteredRifts, parent: EditCommand) :
-        LeafCommand(instance, parent, "ambientParticle", "shatteredrifts.command.edit",
+        LeafCommand(instance, parent, "destination", "shatteredrifts.command.edit",
                 "command.edit") {
     init {
         addAlias("dest")
