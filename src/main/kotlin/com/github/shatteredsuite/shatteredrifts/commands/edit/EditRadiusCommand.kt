@@ -35,9 +35,6 @@ class EditRadiusCommand(val instance: ShatteredRifts, parent: EditCommand) :
         if(ctx.args.size <= 1) {
             return TabCompleters.completeOdds(ctx.args, 0, 5)
         }
-        if(ctx.args.size >= 2 && ctx.sender is Player) {
-            return TabCompleters.completeFromOptions(ctx.args, 1, Particle.values().map { it.name })
-        }
         return emptyList()
     }
 }

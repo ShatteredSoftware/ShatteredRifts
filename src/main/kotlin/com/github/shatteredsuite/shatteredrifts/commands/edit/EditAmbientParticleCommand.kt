@@ -34,10 +34,7 @@ class EditAmbientParticleCommand(val instance: ShatteredRifts, parent: EditComma
     }
 
     override fun tabComplete(ctx: CommandContext): List<String> {
-        if(ctx.args.size <= 1) {
-            return TabCompleters.completeFromOptions(ctx.args, 0, instance.riftManager.getIds().toList())
-        }
-        if(ctx.args.size >= 2 && ctx.sender is Player) {
+        if(ctx.args.size == 1) {
             return TabCompleters.completeFromOptions(ctx.args, 1, Particle.values().map { it.name })
         }
         return emptyList()

@@ -29,11 +29,8 @@ class EditLocationCommand(val instance: ShatteredRifts, parent: EditCommand) :
     }
 
     override fun tabComplete(ctx: CommandContext): List<String> {
-        if(ctx.args.size <= 1) {
-            return TabCompleters.completeFromOptions(ctx.args, 0, instance.riftManager.getIds().toList())
-        }
-        if(ctx.args.size >= 2 && ctx.sender is Player) {
-            return TabCompleters.completeLocationPlayer(ctx.args, 1, ctx.sender as Player)
+        if(ctx.args.isNotEmpty() && ctx.sender is Player) {
+            return TabCompleters.completeLocationPlayer(ctx.args, 0, ctx.sender as Player)
         }
         return emptyList()
     }
