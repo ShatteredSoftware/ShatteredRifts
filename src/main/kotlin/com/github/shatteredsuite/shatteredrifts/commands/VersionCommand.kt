@@ -5,7 +5,7 @@ import com.github.shatteredsuite.core.commands.predicates.CommandContext
 import com.github.shatteredsuite.shatteredrifts.ShatteredRifts
 import com.github.shatteredsuite.shatteredrifts.ext.placeholders
 
-class VersionCommand(val instance: ShatteredRifts, parent: BaseCommand) : LeafCommand(instance, parent, "load", "shatteredscrolls.load", "command.load") {
+class VersionCommand(val instance: ShatteredRifts, parent: BaseCommand) : LeafCommand(instance, parent, "load", "shatteredscrolls.version", "command.version") {
     init {
         addAlias("v")
     }
@@ -19,6 +19,6 @@ class VersionCommand(val instance: ShatteredRifts, parent: BaseCommand) : LeafCo
                 }
         ctx.contextMessages["update-status"] = updateStatus
         ctx.contextMessages.putAll(instance.description.placeholders)
-        ctx.messenger.sendMessage(ctx.sender, "version", ctx.contextMessages, true)
+        ctx.sendMessage(helpPath, true)
     }
 }
