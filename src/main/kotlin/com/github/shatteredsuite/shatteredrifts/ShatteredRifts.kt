@@ -5,11 +5,19 @@ import com.github.shatteredsuite.shatteredrifts.commands.BaseCommand
 import com.github.shatteredsuite.shatteredrifts.config.ConfigManager
 import com.github.shatteredsuite.shatteredrifts.data.LocationDeserializer
 import com.github.shatteredsuite.shatteredrifts.data.LocationSerializer
+import com.github.shatteredsuite.shatteredrifts.data.RiftLocation
 import com.github.shatteredsuite.shatteredrifts.data.RiftManager
+import com.github.shatteredsuite.shatteredrifts.events.RiftTeleportEntityEvent
+import com.github.shatteredsuite.shatteredrifts.events.RiftTeleportPlayerEvent
+import com.github.shatteredsuite.shatteredrifts.ext.column
+import com.github.shatteredsuite.shatteredrifts.ext.offset
+import com.github.shatteredsuite.shatteredrifts.util.Vector2
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import org.bukkit.Bukkit
 import org.bukkit.Location
+import org.bukkit.entity.Entity
+import org.bukkit.entity.Player
 
 class ShatteredRifts : ShatteredPlugin() {
     companion object {
@@ -64,19 +72,40 @@ class ShatteredRifts : ShatteredPlugin() {
             }
             // Add stones to timings if they're not in there already. Add one if they are.
             stoneTimings[stoneLocation.id] = stoneTimings[stoneLocation.id]?.plus(1) ?: 0
-            // Play particles every 5 seconds.
-            if(stoneTimings[stoneLocation.id]!! % stoneLocation.particleFrequency == 0L) {
-                stoneLocation.playAmbientParticles(stoneTimings[stoneLocation.id]!!.toFloat() / (stoneLocation.timing.toFloat()))
-            }
             // Teleport, play particles every second.
             if(stoneTimings[stoneLocation.id]!! > stoneLocation.timing) {
-                stoneLocation.findPlayers().forEach { it.teleport(stoneLocation.destination) }
+                val entities = stoneLocation.findEntities()
+                for(entity in entities) {
+                    teleportEntity(entity, stoneLocation)
+                }
                 stoneLocation.playActiveParticles()
+            }
+            // Play particles every 5 seconds.
+            else if(stoneTimings[stoneLocation.id]!! % stoneLocation.particleFrequency == 0L) {
+                stoneLocation.playAmbientParticles(stoneTimings[stoneLocation.id]!!.toFloat() / (stoneLocation.timing.toFloat()))
             }
             // Reset timer.
             if(stoneTimings[stoneLocation.id]!! > stoneLocation.timing + stoneLocation.duration) {
                 stoneTimings[stoneLocation.id] = 0
             }
         }
+    }
+
+    private fun teleportEntity(entity: Entity, riftLocation: RiftLocation) {
+        val cancelled = if (entity is Player) {
+            val event = RiftTeleportPlayerEvent(entity, riftLocation)
+            Bukkit.getPluginManager().callEvent(event)
+            event.isCancelled
+        } else {
+            val event = RiftTeleportEntityEvent(entity, riftLocation)
+            Bukkit.getPluginManager().callEvent(event)
+            event.isCancelled
+        }
+        if(cancelled) {
+            return
+        }
+        entity.teleport(riftLocation.destination
+                .offset(Vector2(entity.location.x - riftLocation.location.x,
+                        entity.location.y - riftLocation.location.y)))
     }
 }
