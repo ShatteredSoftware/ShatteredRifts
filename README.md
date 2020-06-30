@@ -20,6 +20,7 @@ around or for creating interesting RPG locations to explore.
 Looking for a development release? You can get it 
 [here](https://github.com/ShatteredSuite/ShatteredRifts/releases/tag/latest). Looking for the latest
 full version? You can get it [here](https://github.com/ShatteredSuite/ShatteredRifts/releases/latest).
+Either way, the file ending in `-dist.jar` is what you want.
 
 ## For Developers
 
