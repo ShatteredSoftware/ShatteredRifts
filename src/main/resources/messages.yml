@@ -4,9 +4,9 @@ saved: "&eSaved!"
 command:
   version: |
     &2ShatteredRifts &7v%version%%update-status%
-    &7Author:&a UberPilot
-    &7Support:&9 https://discord.gg/zUbNX9t
-    &7Donate:&e https://patreon.com/UberPilot
+    &fAuthor:&a UberPilot
+    &fSupport:&9 https://discord.gg/zUbNX9t
+    &fDonate:&e https://patreon.com/UberPilot
   base: |
     &2ShatteredRifts
     &7About: &fThe base command of ShatteredRifts.
