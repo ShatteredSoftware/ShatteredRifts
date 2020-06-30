@@ -9,12 +9,12 @@ class VersionCommand(val instance: ShatteredRifts, parent: BaseCommand) : LeafCo
     init {
         addAlias("v")
     }
+
     override fun execute(ctx: CommandContext) {
         val updateStatus: String =
                 if (instance.isUpdateAvailable) {
                     instance.messenger.getMessage("update-available", mapOf("version" to instance.latestVersion))
-                }
-                else {
+                } else {
                     instance.messenger.getMessage("up-to-date", null)
                 }
         ctx.contextMessages["update-status"] = updateStatus

@@ -6,18 +6,16 @@ import com.google.gson.reflect.TypeToken
 import java.io.*
 import java.nio.charset.StandardCharsets
 import java.util.*
-import java.util.function.Predicate
-import java.util.stream.Collectors
 
 object ConfigManager {
     @JvmStatic
-    fun loadRifts(instance: ShatteredRifts) : List<RiftLocation> {
+    fun loadRifts(instance: ShatteredRifts): List<RiftLocation> {
         if (!instance.dataFolder.exists()) {
             instance.dataFolder.mkdirs()
             writeRifts(instance, listOf(RiftLocation.DEFAULT))
         }
         val riftsFile = File(instance.dataFolder, "rifts.json")
-        if(!riftsFile.exists()) {
+        if (!riftsFile.exists()) {
             writeRifts(instance, listOf(RiftLocation.DEFAULT))
         }
         val type = object : TypeToken<ArrayList<RiftLocation>>() {}.type

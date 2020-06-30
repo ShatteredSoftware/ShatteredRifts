@@ -9,7 +9,6 @@ import com.github.shatteredsuite.shatteredrifts.data.RiftLocation
 import com.github.shatteredsuite.shatteredrifts.data.RiftManager
 import com.github.shatteredsuite.shatteredrifts.events.RiftTeleportEntityEvent
 import com.github.shatteredsuite.shatteredrifts.events.RiftTeleportPlayerEvent
-import com.github.shatteredsuite.shatteredrifts.ext.column
 import com.github.shatteredsuite.shatteredrifts.ext.offset
 import com.github.shatteredsuite.shatteredrifts.util.Vector2
 import com.google.gson.Gson
@@ -66,26 +65,26 @@ class ShatteredRifts : ShatteredPlugin() {
     }
 
     fun updateStones() {
-        for(stoneLocation in riftManager.getAll()) {
-            if(!stoneLocation.enabled) {
+        for (stoneLocation in riftManager.getAll()) {
+            if (!stoneLocation.enabled) {
                 continue
             }
             // Add stones to timings if they're not in there already. Add one if they are.
             stoneTimings[stoneLocation.id] = stoneTimings[stoneLocation.id]?.plus(1) ?: 0
             // Teleport, play particles every second.
-            if(stoneTimings[stoneLocation.id]!! > stoneLocation.timing) {
+            if (stoneTimings[stoneLocation.id]!! > stoneLocation.timing) {
                 val entities = stoneLocation.findEntities()
-                for(entity in entities) {
+                for (entity in entities) {
                     teleportEntity(entity, stoneLocation)
                 }
                 stoneLocation.playActiveParticles()
             }
             // Play particles every 5 seconds.
-            else if(stoneTimings[stoneLocation.id]!! % stoneLocation.particleFrequency == 0L) {
+            else if (stoneTimings[stoneLocation.id]!! % stoneLocation.particleFrequency == 0L) {
                 stoneLocation.playAmbientParticles(stoneTimings[stoneLocation.id]!!.toFloat() / (stoneLocation.timing.toFloat()))
             }
             // Reset timer.
-            if(stoneTimings[stoneLocation.id]!! > stoneLocation.timing + stoneLocation.duration) {
+            if (stoneTimings[stoneLocation.id]!! > stoneLocation.timing + stoneLocation.duration) {
                 stoneTimings[stoneLocation.id] = 0
             }
         }
@@ -101,7 +100,7 @@ class ShatteredRifts : ShatteredPlugin() {
             Bukkit.getPluginManager().callEvent(event)
             event.isCancelled
         }
-        if(cancelled) {
+        if (cancelled) {
             return
         }
         entity.teleport(riftLocation.destination

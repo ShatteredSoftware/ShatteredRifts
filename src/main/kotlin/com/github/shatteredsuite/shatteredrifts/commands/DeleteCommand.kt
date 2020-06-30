@@ -27,7 +27,7 @@ class DeleteCommand(private val instance: ShatteredRifts, baseCommand: BaseComma
     }
 
     override fun onTabComplete(ctx: CommandContext): List<String> {
-        if(ctx.args.size <= 1) {
+        if (ctx.args.size <= 1) {
             return TabCompleters.completeFromOptions(ctx.args, ctx.args.lastIndex,
                     instance.riftManager.getIds().toList())
         }

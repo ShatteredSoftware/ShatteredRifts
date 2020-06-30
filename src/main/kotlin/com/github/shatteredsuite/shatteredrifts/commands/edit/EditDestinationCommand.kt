@@ -21,13 +21,11 @@ class EditDestinationCommand(val instance: ShatteredRifts, parent: EditCommand) 
 
     override fun execute(ctx: CommandContext) {
         val oldRift = RiftLocationValidator.validate(ctx.args[0])
-        val loc = if(ctx.sender is Player && ctx.args.size == 1) {
+        val loc = if (ctx.sender is Player && ctx.args.size == 1) {
             (ctx.sender as Player).location
-        }
-        else if(ctx.sender is Player && ctx.args.size == 4) {
+        } else if (ctx.sender is Player && ctx.args.size == 4) {
             ArgParser.validShortLocation(ctx.args, 1, ctx.sender as Player)
-        }
-        else ArgParser.validLocation(ctx.args, 1)
+        } else ArgParser.validLocation(ctx.args, 1)
         val rift = oldRift.copy(destination = loc)
         instance.riftManager.delete(oldRift.id)
         instance.riftManager.register(rift)
@@ -38,7 +36,7 @@ class EditDestinationCommand(val instance: ShatteredRifts, parent: EditCommand) 
     }
 
     override fun tabComplete(ctx: CommandContext): List<String> {
-        if(ctx.args.isNotEmpty() && ctx.sender is Player) {
+        if (ctx.args.isNotEmpty() && ctx.sender is Player) {
             return TabCompleters.completeLocationPlayer(ctx.args, 0, ctx.sender as Player)
         }
         return emptyList()

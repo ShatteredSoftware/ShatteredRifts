@@ -1,9 +1,7 @@
 package com.github.shatteredsuite.shatteredrifts.commands
 
 import com.github.shatteredsuite.core.commands.LeafCommand
-import com.github.shatteredsuite.core.commands.predicates.ArgumentMinimumPredicate
 import com.github.shatteredsuite.core.commands.predicates.CommandContext
-import com.github.shatteredsuite.core.commands.responses.CancelResponse
 import com.github.shatteredsuite.shatteredrifts.ShatteredRifts
 
 class SaveCommand(val instance: ShatteredRifts, parent: BaseCommand) :

@@ -4,7 +4,6 @@ import com.github.shatteredsuite.core.commands.ParameterizedBranchCommand
 import com.github.shatteredsuite.core.commands.predicates.CommandContext
 import com.github.shatteredsuite.shatteredrifts.ShatteredRifts
 import com.github.shatteredsuite.shatteredrifts.commands.edit.*
-import java.time.Duration
 
 class EditCommand(val instance: ShatteredRifts, parent: BaseCommand) :
         ParameterizedBranchCommand(instance, parent, "edit", "shatteredrifts.command.edit",

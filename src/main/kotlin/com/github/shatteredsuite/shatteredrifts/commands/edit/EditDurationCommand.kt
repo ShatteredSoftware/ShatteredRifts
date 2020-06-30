@@ -7,8 +7,6 @@ import com.github.shatteredsuite.core.validation.Validators
 import com.github.shatteredsuite.shatteredrifts.ShatteredRifts
 import com.github.shatteredsuite.shatteredrifts.commands.EditCommand
 import com.github.shatteredsuite.shatteredrifts.validators.RiftLocationValidator
-import org.bukkit.Particle
-import org.bukkit.entity.Player
 
 class EditDurationCommand(val instance: ShatteredRifts, parent: EditCommand) :
         LeafCommand(instance, parent, "duration", "shatteredrifts.command.edit",
@@ -30,7 +28,7 @@ class EditDurationCommand(val instance: ShatteredRifts, parent: EditCommand) :
     }
 
     override fun tabComplete(ctx: CommandContext): List<String> {
-        if(ctx.args.size <= 1) {
+        if (ctx.args.size <= 1) {
             return TabCompleters.completeOdds(ctx.args, 0, 5)
         }
         return emptyList()

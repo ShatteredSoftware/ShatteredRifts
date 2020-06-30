@@ -9,7 +9,7 @@ import java.lang.reflect.Type
 class LocationSerializer(private val instance: ShatteredRifts) : JsonSerializer<Location> {
     override fun serialize(location: Location?, p1: Type?, p2: JsonSerializationContext?): JsonElement {
         val element = JsonObject()
-        if(location == null) {
+        if (location == null) {
             return element
         }
         element.add("x", instance.gson.toJsonTree(location.x))
@@ -31,7 +31,7 @@ class LocationDeserializer : JsonDeserializer<Location> {
         val pitch = obj.get("pitch").asFloat
         val yaw = obj.get("yaw").asFloat
         val worldName = obj.get("world")
-        val world = if(worldName == null) {
+        val world = if (worldName == null) {
             Bukkit.getWorlds()[0]
         } else Bukkit.getWorld(worldName.asString)
         return Location(world, x, y, z, yaw, pitch)

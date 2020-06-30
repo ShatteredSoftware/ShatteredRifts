@@ -1,6 +1,5 @@
 package com.github.shatteredsuite.shatteredrifts.data
 
-import com.github.shatteredsuite.core.include.xseries.ParticleDisplay
 import com.github.shatteredsuite.core.util.Identified
 import com.github.shatteredsuite.shatteredrifts.ext.column
 import com.github.shatteredsuite.shatteredrifts.ext.offset
@@ -10,8 +9,6 @@ import org.bukkit.Location
 import org.bukkit.Material
 import org.bukkit.Particle
 import org.bukkit.entity.Entity
-import java.lang.IllegalArgumentException
-import java.lang.IllegalStateException
 import kotlin.math.roundToInt
 
 /**
@@ -32,7 +29,8 @@ data class RiftLocation(override val id: String, val location: Location, val des
     : Identified {
     fun findEntities(): List<Entity> {
         return this.location.world?.getNearbyEntities(this.location, this.radius, this.height.toDouble(), this.radius)
-        { it.location.column().distance(this.location.column()) <= this.radius }?.toList() ?: emptyList()
+        { it.location.column().distance(this.location.column()) <= this.radius }?.toList()
+                ?: emptyList()
     }
 
     val placeholders: Map<String, String>
@@ -93,8 +91,7 @@ data class RiftLocation(override val id: String, val location: Location, val des
                     particleLocation.world!!.spawnParticle(particle, particleLocation, 1)
                 }
             }
-        }
-        catch(ex: IllegalArgumentException) {
+        } catch (ex: IllegalArgumentException) {
             return
         }
     }

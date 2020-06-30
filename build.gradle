@@ -60,7 +60,7 @@ task getHash {
 processResources {
     dependsOn getHash
     def hash = getHash.hash
-    with copySpec{
+    with copySpec {
         from 'src/main/resources'
         filter(ReplaceTokens, tokens: [description: project.property('description'),
                                        projectName: project.property('projectName'),
