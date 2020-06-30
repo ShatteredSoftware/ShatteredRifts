@@ -1,0 +1,38 @@
+prefix: "&2ShatteredScrolls &7» &f"
+loaded: "&eLoaded!"
+saved: "&eSaved!"
+command:
+  version: |
+    &2ShatteredRifts &7v%version%%updatestatus%
+    &7Author:&a UberPilot
+    &7Support:&9 https://discord.gg/zUbNX9t
+    &7Donate:&e https://patreon.com/UberPilot
+  base: |
+    &2ShatteredRifts
+    &7About: &fThe base command of ShatteredRifts.
+    &7- &a/%label% create &8- &fCreate a new rift with the default settings.
+    &7- &a/%label% delete &8- &fDelete a rift.
+    &7- &a/%label% edit &8- &fEdit a rift.
+    &7- &a/%label% load &8- &fLoad content from the config.
+    &7- &a/%label% save &8- &fSave content to the config.
+    &7- &a/%label% version &8- &fShow version and help information.
+    &7Permission: &f%permission%
+  create: |
+    &2ShatteredRifts &7- &aCreate Rift
+    &7About: &fCreates a new rift with the default settings. Use &a/%label% edit&f to edit it.
+    &7Usage: &f/rifts create <id>
+    &7Permission: &f%permission%
+  delete: |
+    &2ShatteredRifts &7- &aDelete Rift
+    &7About: &fDeletes a rift.
+    &7Usage: &f/rifts delete <id>
+    &7Permission: &f%permission%
+  edit: |
+    &2ShatteredRifts &7- &aEdit Rift
+    &7About: &fEdits a rift, setting &akey&f to be equal to &avalue&f.
+    &7Keys: &factiveParticle, ambientParticle, destination, duration, enabled, height, location, particleFrequency, radius, timing
+    &7Usage: &f/rifts edit <id> <key> <value>
+    &7Permission: &f%permission%
+rift-created: "&fRift &a%id%&f created."
+rift-deleted: "&fRift &a%id%&f deleted."
+rift-edited: "&a%key%&f on &a%id%&f set to &a%value%&f."

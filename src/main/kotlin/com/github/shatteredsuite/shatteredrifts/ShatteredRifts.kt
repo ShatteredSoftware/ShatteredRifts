@@ -12,11 +12,17 @@ import org.bukkit.Bukkit
 import org.bukkit.Location
 
 class ShatteredRifts : ShatteredPlugin() {
+    companion object {
+        lateinit var instance: ShatteredRifts
+            private set
+    }
+
     var riftManager = RiftManager()
     var stoneTimings = mutableMapOf<String, Long>()
     val gson: Gson
 
     init {
+        instance = this
         this.createMessages = true
         val builder = GsonBuilder()
         builder.registerTypeAdapter(Location::class.java, LocationDeserializer())
@@ -25,20 +31,30 @@ class ShatteredRifts : ShatteredPlugin() {
     }
 
     override fun postEnable() {
-        val rifts = ConfigManager.loadRifts(this)
-        for (rift in rifts) {
-            riftManager.register(rift)
-        }
+        loadContent()
+        getCommand("rifts")!!.setExecutor(BaseCommand(this))
     }
 
     override fun preDisable() {
-        ConfigManager.writeRifts(this, riftManager.getAll())
+        saveContent()
     }
 
     override fun onFirstTick() {
         Bukkit.getScheduler().scheduleSyncRepeatingTask(this, {
             this.updateStones()
         }, 20L, 20L)
+    }
+
+    fun loadContent() {
+
+        val rifts = ConfigManager.loadRifts(this)
+        for (rift in rifts) {
+            riftManager.register(rift)
+        }
+    }
+
+    fun saveContent() {
+        ConfigManager.writeRifts(this, riftManager.getAll())
     }
 
     fun updateStones() {

@@ -6,3 +6,6 @@ author: UberPilot
 api-version: "1.13"
 depend:
   - ShatteredCore
+commands:
+  rifts:
+    aliases: [rift]
