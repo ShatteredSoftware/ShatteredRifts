@@ -1,25 +1,41 @@
 package com.github.shatteredsuite.shatteredrifts
 
 import com.github.shatteredsuite.core.ShatteredPlugin
-import com.github.shatteredsuite.shatteredrifts.data.RiftLocation
+import com.github.shatteredsuite.shatteredrifts.commands.BaseCommand
+import com.github.shatteredsuite.shatteredrifts.config.ConfigManager
+import com.github.shatteredsuite.shatteredrifts.data.LocationDeserializer
+import com.github.shatteredsuite.shatteredrifts.data.LocationSerializer
 import com.github.shatteredsuite.shatteredrifts.data.RiftManager
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import org.bukkit.Bukkit
 import org.bukkit.Location
-import org.bukkit.Particle
 
 class ShatteredRifts : ShatteredPlugin() {
     var riftManager = RiftManager()
     var stoneTimings = mutableMapOf<String, Long>()
+    val gson: Gson
 
     init {
         this.createMessages = true
+        val builder = GsonBuilder()
+        builder.registerTypeAdapter(Location::class.java, LocationDeserializer())
+        builder.registerTypeAdapter(Location::class.java, LocationSerializer(this))
+        gson = builder.setPrettyPrinting().create()
+    }
+
+    override fun postEnable() {
+        val rifts = ConfigManager.loadRifts(this)
+        for (rift in rifts) {
+            riftManager.register(rift)
+        }
+    }
+
+    override fun preDisable() {
+        ConfigManager.writeRifts(this, riftManager.getAll())
     }
 
     override fun onFirstTick() {
-        riftManager.register(RiftLocation("test",
-                Location(Bukkit.getWorld("world"), 0.0, 100.0, 0.0),
-                Location(Bukkit.getWorld("world"), 50.0, 100.0, 0.0), 4.0, 4, 60,
-                500, 5, 10, Particle.PORTAL, Particle.ENCHANTMENT_TABLE, true))
         Bukkit.getScheduler().scheduleSyncRepeatingTask(this, {
             this.updateStones()
         }, 20L, 20L)
