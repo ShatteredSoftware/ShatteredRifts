@@ -66,7 +66,7 @@ data class Vector2(val x: Double, val y: Double) {
     }
 
     private fun randomRadian() : Double {
-        return Random.nextFloat() * PI
+        return Random.nextFloat() * PI * 2
     }
 
     fun distance(point2: Vector2): Double {
