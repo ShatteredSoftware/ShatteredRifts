@@ -54,7 +54,7 @@ class ShatteredRifts : ShatteredPlugin() {
     }
 
     fun saveContent() {
-        ConfigManager.writeRifts(this, riftManager.getAll())
+        ConfigManager.writeRifts(this, riftManager.getAll().toList())
     }
 
     fun updateStones() {
