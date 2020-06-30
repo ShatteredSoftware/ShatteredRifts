@@ -78,4 +78,8 @@ data class Vector2(val x: Double, val y: Double) {
         result = 31 * result + y.hashCode()
         return result
     }
+
+    companion object {
+        val ZERO = Vector2(0.0, 0.0)
+    }
 }
