@@ -1,9 +1,9 @@
-package com.github.shatteredsuite.shatteredstones.data
+package com.github.shatteredsuite.shatteredrifts.data
 
 import com.github.shatteredsuite.core.util.Identified
-import com.github.shatteredsuite.shatteredstones.ext.column
-import com.github.shatteredsuite.shatteredstones.ext.offset
-import com.github.shatteredsuite.shatteredstones.util.Vector2
+import com.github.shatteredsuite.shatteredrifts.ext.column
+import com.github.shatteredsuite.shatteredrifts.ext.offset
+import com.github.shatteredsuite.shatteredrifts.util.Vector2
 import org.bukkit.Bukkit
 import org.bukkit.Location
 import org.bukkit.Particle

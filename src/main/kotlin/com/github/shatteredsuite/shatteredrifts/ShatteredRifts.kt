@@ -1,13 +1,13 @@
-package com.github.shatteredsuite.shatteredstones
+package com.github.shatteredsuite.shatteredrifts
 
 import com.github.shatteredsuite.core.ShatteredPlugin
-import com.github.shatteredsuite.shatteredstones.data.StoneLocation
-import com.github.shatteredsuite.shatteredstones.data.StoneLocationManager
+import com.github.shatteredsuite.shatteredrifts.data.StoneLocation
+import com.github.shatteredsuite.shatteredrifts.data.StoneLocationManager
 import org.bukkit.Bukkit
 import org.bukkit.Location
 import org.bukkit.Particle
 
-class ShatteredStones : ShatteredPlugin() {
+class ShatteredRifts : ShatteredPlugin() {
     var stoneLocationManager = StoneLocationManager()
     var stoneTimings = mutableMapOf<String, Long>()
 

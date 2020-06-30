@@ -1,6 +1,6 @@
-package com.github.shatteredsuite.shatteredstones.ext
+package com.github.shatteredsuite.shatteredrifts.ext
 
-import com.github.shatteredsuite.shatteredstones.util.Vector2
+import com.github.shatteredsuite.shatteredrifts.util.Vector2
 import org.bukkit.Location
 
 fun Location.column() : Vector2 {

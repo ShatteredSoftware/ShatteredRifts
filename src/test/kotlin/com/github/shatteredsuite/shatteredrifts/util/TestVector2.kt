@@ -1,4 +1,4 @@
-package com.github.shatteredsuite.shatteredstones.util
+package com.github.shatteredsuite.shatteredrifts.util
 
 import org.junit.Assert
 import org.junit.Test
