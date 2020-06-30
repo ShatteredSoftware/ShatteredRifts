@@ -30,10 +30,17 @@ data class RiftLocation(override val id: String, val location: Location, val des
     fun findPlayers(): List<Player> {
         return Bukkit.getOnlinePlayers().parallelStream().filter {
             it.location.world == location.world
-                && location.column().distance(it.location.column()) <= radius
-                && it.location.blockY in location.blockY..(location.blockY + height)
+                    && location.column().distance(it.location.column()) <= radius
+                    && it.location.blockY in location.blockY..(location.blockY + height)
         }.collect(Collectors.toList())
     }
+
+    val placeholders: Map<String, String> = mapOf("id" to id, "radius" to radius.toString(),
+            "height" to height.toString(), "timing" to timing.toString(),
+            "duration" to duration.toString(), "particles" to particles.toString(),
+            "particle-frequency" to particleFrequency.toString(),
+            "ambient-particle" to ambientParticle.name, "active-particle" to activeParticle.name,
+            "enabled" to enabled.toString())
 
     fun playAmbientParticles(gradient: Float) {
         val col = Vector2.ZERO
