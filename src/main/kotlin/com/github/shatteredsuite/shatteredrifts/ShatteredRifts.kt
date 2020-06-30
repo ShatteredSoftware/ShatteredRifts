@@ -59,6 +59,9 @@ class ShatteredRifts : ShatteredPlugin() {
 
     fun updateStones() {
         for(stoneLocation in riftManager.getAll()) {
+            if(!stoneLocation.enabled) {
+                continue
+            }
             // Add stones to timings if they're not in there already. Add one if they are.
             stoneTimings[stoneLocation.id] = stoneTimings[stoneLocation.id]?.plus(1) ?: 0
             // Play particles every 5 seconds.
