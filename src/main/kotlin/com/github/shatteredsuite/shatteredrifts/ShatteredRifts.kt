@@ -31,6 +31,7 @@ class ShatteredRifts : ShatteredPlugin() {
     init {
         instance = this
         this.createMessages = true
+        this.bStatsId = 8042
         val builder = GsonBuilder()
         builder.registerTypeAdapter(Location::class.java, LocationDeserializer())
         builder.registerTypeAdapter(Location::class.java, LocationSerializer(this))
