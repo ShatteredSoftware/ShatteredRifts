@@ -53,7 +53,7 @@ data class RiftLocation(override val id: String, val location: Location, val des
 
     fun playActiveParticles() {
         val col = Vector2.ZERO
-        for (i in 0..particles) {
+        for (i in 0..particles / 5) {
             val vec = col.randomRadiusPoint(this.radius)
             val particleLocation = location.offset(vec)
             playParticle(activeParticle, particleLocation)

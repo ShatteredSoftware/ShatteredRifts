@@ -17,6 +17,7 @@ import org.bukkit.Bukkit
 import org.bukkit.Location
 import org.bukkit.entity.Entity
 import org.bukkit.entity.Player
+import org.bukkit.util.Vector
 
 class ShatteredRifts : ShatteredPlugin() {
     companion object {
@@ -25,7 +26,8 @@ class ShatteredRifts : ShatteredPlugin() {
     }
 
     var riftManager = RiftManager()
-    var stoneTimings = mutableMapOf<String, Long>()
+    private val stoneTimings = mutableMapOf<String, Long>()
+    private val tasks = mutableMapOf<String, Int>()
     val gson: Gson
 
     init {
@@ -73,12 +75,14 @@ class ShatteredRifts : ShatteredPlugin() {
             // Add stones to timings if they're not in there already. Add one if they are.
             stoneTimings[stoneLocation.id] = stoneTimings[stoneLocation.id]?.plus(1) ?: 0
             // Teleport, play particles every second.
-            if (stoneTimings[stoneLocation.id]!! > stoneLocation.timing) {
-                val entities = stoneLocation.findEntities()
-                for (entity in entities) {
-                    teleportEntity(entity, stoneLocation)
-                }
-                stoneLocation.playActiveParticles()
+            if (stoneTimings[stoneLocation.id]!! == stoneLocation.timing.toLong()) {
+                tasks[stoneLocation.id] = server.scheduler.scheduleSyncRepeatingTask(this, {
+                    val entities = stoneLocation.findEntities()
+                    for (entity in entities) {
+                        teleportEntity(entity, stoneLocation)
+                    }
+                    stoneLocation.playActiveParticles()
+                }, 1L, 0L)
             }
             // Play particles every 5 seconds.
             else if (stoneTimings[stoneLocation.id]!! % stoneLocation.particleFrequency == 0L) {
@@ -87,6 +91,7 @@ class ShatteredRifts : ShatteredPlugin() {
             // Reset timer.
             if (stoneTimings[stoneLocation.id]!! > stoneLocation.timing + stoneLocation.duration) {
                 stoneTimings[stoneLocation.id] = 0
+                tasks[stoneLocation.id]?.let { server.scheduler.cancelTask(it) }
             }
         }
     }
@@ -104,8 +109,15 @@ class ShatteredRifts : ShatteredPlugin() {
         if (cancelled) {
             return
         }
-        entity.teleport(riftLocation.destination
+        val velocity = entity.velocity
+        val newPos = riftLocation.destination
                 .offset(Vector2(entity.location.x - riftLocation.location.x,
-                        entity.location.y - riftLocation.location.y)))
+                        entity.location.y - riftLocation.location.y))
+        val height = entity.location.y - riftLocation.location.y
+        newPos.yaw = entity.location.yaw
+        newPos.pitch = entity.location.pitch
+        newPos.y += height
+        entity.teleport(newPos)
+        entity.velocity = velocity
     }
 }
